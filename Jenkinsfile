@@ -26,7 +26,7 @@ pipeline {
 		stage('Deploy AWS') {
 			steps{
 				script {
-					docker.withRegistry(registry, registryCredential) {
+					docker.withRegistry(registry, 'ecr:us-east-1:awsCredential') {
 					docker.push('sampleimage').push('v7')
 					}
 				}
