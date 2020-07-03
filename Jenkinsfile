@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    registry = "164506192075.dkr.ecr.us-east-1.amazonaws.com/renewables-uai3036814-hybrid-arch-dev-ecr"
+    registry = '164506192075.dkr.ecr.us-east-1.amazonaws.com/renewables-uai3036814-hybrid-arch-dev-ecr'
     registryCredential = 'awsCredential'
   }
     agent any
@@ -27,7 +27,7 @@ pipeline {
 			steps{
 				script {
 					docker.withRegistry(registry, registryCredential) {
-					docker.image('sampleImage').push('v7')
+					docker.push('sampleimage').push('v7')
 					}
 				}
 			}
