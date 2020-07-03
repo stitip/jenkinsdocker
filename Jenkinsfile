@@ -1,4 +1,8 @@
 pipeline {
+  environment {
+    registry = "ferozalla/ferozalla"
+    registryCredential = 'ferozalla'
+  }
     agent any
 
     stages {
@@ -10,5 +14,13 @@ pipeline {
                 }
             }
         }
+		
+		stage('Building image') {
+			steps{
+				script {
+					docker.build registry + ":$BUILD_NUMBER"
+				}
+			}
+		}
     }
 }
