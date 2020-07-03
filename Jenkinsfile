@@ -1,8 +1,7 @@
 pipeline {
   environment {
-    registry = "ferozalla/ferozalla"
-    registryCredential = 'ferozalla'
-	dockerImage = ''
+    registry = "164506192075.dkr.ecr.us-east-1.amazonaws.com/renewables-uai3036814-hybrid-arch-dev-ecr"
+    registryCredential = 'awsCredential'
   }
     agent any
 
@@ -19,16 +18,16 @@ pipeline {
 		stage('Building image') {
 			steps{
 				script {
-					dockerImage = docker.build registry + ":$BUILD_NUMBER"
+					docker.build('sampleImage')
 				}
 			}
 		}
 		
-		stage('Deploy Image') {
+		stage('Deploy AWS') {
 			steps{
 				script {
-					docker.withRegistry( '', registryCredential ) {
-					dockerImage.push()
+					docker.withRegistry(registry, registryCredential) {
+					docker.image('sampleImage').push('v7')
 					}
 				}
 			}
