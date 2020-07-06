@@ -1,7 +1,8 @@
 pipeline {
   environment {
-    registry = '164506192075.dkr.ecr.us-east-1.amazonaws.com/renewables-uai3036814-hybrid-arch-dev-ecr'
+    registry = '164506192075.dkr.ecr.us-east-1.amazonaws.com'
     registryCredential = 'awsCredential'
+	dockerImage = ''
   }
     agent any
 
@@ -18,7 +19,7 @@ pipeline {
 		stage('Building image') {
 			steps{
 				script {
-					docker.build('sampleimage')
+					dockerImage = docker.build('sampleimage')
 				}
 			}
 		}
@@ -26,8 +27,9 @@ pipeline {
 		stage('Deploy AWS') {
 			steps{
 				script {
+				    bat("eval \$(aws ecr get-login --no-include-email | sed 's|https://||')")
 					docker.withRegistry(registry, 'ecr:us-east-1:awsCredential') {
-					docker.push('sampleimage').push('v7')
+					docker.image(dockerImage).push()
 					}
 				}
 			}
