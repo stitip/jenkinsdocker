@@ -27,7 +27,7 @@ pipeline {
 		stage('Deploy AWS') {
 			steps{
 				script {
-				    bat("bash \$(aws ecr get-login --no-include-email | sed 's|https://||')")
+				    bat("\$(aws ecr get-login --no-include-email | sed 's|https://||')")
 					docker.withRegistry(registry, 'ecr:us-east-1:awsCredential') {
 					docker.image(dockerImage).push()
 					}
