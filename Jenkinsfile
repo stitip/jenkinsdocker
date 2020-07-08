@@ -27,7 +27,8 @@ pipeline {
 		stage('Deploy AWS') {
 			steps{
 				script {
-				    bat("aws configure")
+					bat 'aws configure set aws_access_key_id ASIASMTKVJDFZYK3IHHU'
+                    bat 'aws configure set aws_secret_access_key R4a5zYYG2kHmJUC8J9M84mzpHnLjpTJuedMv/uWb'
 					docker.withRegistry(registry, 'ecr:us-east-1:registryCredential') {
 					docker.image(dockerImage).push()
 					}
