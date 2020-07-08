@@ -28,7 +28,7 @@ pipeline {
 		stage('Deploy AWS') {
 			steps{
 				script {
-				    Invoke-Expression $(aws ecr get-login --no-include-email --region us-east-1)
+				    bat("aws ecr get-login --no-include-email --region us-east-1 | clip")
 					bat('docker tag sampleimage:latest 164506192075.dkr.ecr.us-east-1.amazonaws.com/sampleimage:latest')
 					bat('docker push 164506192075.dkr.ecr.us-east-1.amazonaws.com/sampleimage:latest')
 				}
