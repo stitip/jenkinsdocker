@@ -28,11 +28,8 @@ pipeline {
 		stage('Deploy AWS') {
 			steps{
 				script {
-					bat 'aws configure set aws_access_key_id ASIASMTKVJDFZYK3IHHU'
-                    bat 'aws configure set aws_secret_access_key R4a5zYYG2kHmJUC8J9M84mzpHnLjpTJuedMv/uWb'
-					docker.withRegistry(registry, ECRCRED) {
-					docker.image(dockerImage).push()
-					}
+				    bat("aws ecr get-login --no-include-email --region us-east-1 | pbcopy")
+					bat('docker tag sampleimage:latest 164506192075.dkr.ecr.us-east-1.amazonaws.com/sampleimage:latest')
 				}
 			}
 		}
