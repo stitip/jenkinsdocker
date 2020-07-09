@@ -12,7 +12,7 @@ pipeline {
 
             steps {
                 withMaven(maven : 'MavenLocal') {
-                    sh 'mvn clean install'
+                    bat 'mvn clean install'
                 }
             }
         }
@@ -28,9 +28,8 @@ pipeline {
 		stage('Deploy AWS') {
 			steps{
 				script {
-				    sh("eval \$(aws ecr get-login --no-include-email | sed 's|https://||')")
-					sh('docker tag sampleimage:latest 164506192075.dkr.ecr.us-east-1.amazonaws.com/sampleimage:latest')
-					sh('docker push 164506192075.dkr.ecr.us-east-1.amazonaws.com/sampleimage:latest')
+					bat('docker tag sampleimage:latest 164506192075.dkr.ecr.us-east-1.amazonaws.com/sampleimage:latest')
+					bat('docker push 164506192075.dkr.ecr.us-east-1.amazonaws.com/sampleimage:latest')
 				}
 			}
 		}
