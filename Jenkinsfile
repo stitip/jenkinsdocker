@@ -28,7 +28,6 @@ pipeline {
 		stage('Deploy AWS') {
 			steps{
 				script {
-				    bat("aws ecr get-login --no-include-email --region us-east-1 | clip")
 					bat('docker tag sampleimage:latest 164506192075.dkr.ecr.us-east-1.amazonaws.com/renewables-uai3036814-hybrid-arch-dev-ecr:sampleimage-v1')
 					bat('docker push 164506192075.dkr.ecr.us-east-1.amazonaws.com/renewables-uai3036814-hybrid-arch-dev-ecr:sampleimage-v1')
 				}
