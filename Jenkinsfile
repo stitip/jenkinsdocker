@@ -21,7 +21,7 @@ pipeline {
 			steps{
 				script {
 					dockerImage = docker.build('sampleimage')
-					bat("aws ecr get-login --no-include-email > ecr.bat")
+					bat("aws ecr get-login --no-include-email --region us-east-1 > ecr.bat")
 					bat("ecr.bat")
 				}
 			}
