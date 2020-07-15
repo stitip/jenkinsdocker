@@ -16,7 +16,7 @@
 			steps{
 				script {
                     version=bat 'git rev-parse --short HEAD'
-					ImageName = ImageName + ":" +$version
+					ImageName = ImageName + ":" +"$version"
 				}
 			}
 		}
