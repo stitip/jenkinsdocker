@@ -1,13 +1,28 @@
-pipeline {
+ pipeline {
   environment {
     registry = '164506192075.dkr.ecr.us-east-1.amazonaws.com'
     registryCredential = 'awsCredential'
+	Namespace = 'default'
+	ImageName = 'test'
+	version = 'latest'
 	ECRCRED = 'ecr:us-east-1:tap_ecr'
 	dockerImage = ''
   }
     agent any
 
     stages {
+	
+	     stage('image tag preparation') {
+			steps{
+				script {
+                    gitCommitHash = bat (returnStdout: true, script: 'git rev-parse HEAD').trim()
+                    shortCommitHash = gitCommitHash.take(7)
+                    version = shortCommitHash
+					ImageName = ImageName:version
+				}
+			}
+		}
+		 
         stage ('Compile Stage') {
 
             steps {
@@ -20,12 +35,13 @@ pipeline {
 		stage('Building image') {
 			steps{
 				script {
-					dockerImage = docker.build('sampleimage')
+					dockerImage = docker.build(ImageName)
+					bat('docker tag dockerImage generated:v1')
 				}
 			}
 		}
 		
-		stage('Deploy AWS') {
+		stage('Deploy docker desktop kubernetes') {
 			steps{
 				script {
 				    bat("ecrLogin.bat")
