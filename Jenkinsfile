@@ -16,7 +16,7 @@
 			steps{
 				script {
                     gitCommitHash = bat 'git rev-parse --short HEAD'
-                    version = shortCommitHash
+                    version = gitCommitHash
 					ImageName = ImageName + ":" +version
 				}
 			}
