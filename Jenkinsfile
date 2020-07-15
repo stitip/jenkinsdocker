@@ -18,7 +18,7 @@
                     gitCommitHash = bat (returnStdout: true, script: 'git rev-parse HEAD').trim()
                     shortCommitHash = gitCommitHash.take(7)
                     version = shortCommitHash
-					ImageName = ImageName":"version
+					ImageName = ImageName + ":" +version
 				}
 			}
 		}
