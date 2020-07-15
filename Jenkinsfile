@@ -17,7 +17,7 @@
 				script {
                     gitCommitHash = bat 'git rev-parse --short HEAD'
                     version = gitCommitHash
-					ImageName = ImageName + ":" +version
+					ImageName = ImageName + ":" +"v2"
 				}
 			}
 		}
