@@ -15,9 +15,7 @@
 	     stage('image tag preparation') {
 			steps{
 				script {
-                    gitCommitHash = bat (returnStdout: true, script: 'git rev-parse HEAD').trim()
-                    shortCommitHash = gitCommitHash.take(7)
-                    version = shortCommitHash
+                    version = bat 'git rev-parse --short HEAD'
 					ImageName = ImageName + ":" +version
 				}
 			}
