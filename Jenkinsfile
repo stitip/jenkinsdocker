@@ -23,10 +23,11 @@ pipeline {
 				script {
 				    echo "${NAME}"
 					echo "${VERSION}"
-					dockerImage = docker.build "$NAME"
-					dockerImage.push(VERSION)
+					dockerImage = docker.build "$NAME:$BUILD_NUMBER"
+					//dockerImage.push(VERSION)
 				}
 			}
 		}
+		
     }
 }
