@@ -3,6 +3,9 @@ pipeline {
     registry = '164506192075.dkr.ecr.us-east-1.amazonaws.com'
     registryCredential = 'awsCredential'
 	dockerImage = ''
+	version = 'latest'
+	IMAGE = ''
+	PROJECT = 'test'
   }
     agent any
 
@@ -12,6 +15,26 @@ pipeline {
             steps {
                 withMaven(maven : 'MavenLocal') {
                     sh 'mvn clean install'
+                }
+            }
+        }
+		
+		stage('image tag preparations')
+        {
+            steps
+            {
+                script 
+                {
+                    // calculate GIT lastest commit short-hash
+                    gitCommitHash = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
+                    shortCommitHash = gitCommitHash.take(7)
+                    // calculate a sample version tag
+                    version = shortCommitHash
+                    // set the build display name
+                    currentBuild.displayName = "#${BUILD_ID}-${version}"
+                    IMAGE = "$PROJECT:$version"
+					echo $IMAGE
+					
                 }
             }
         }
