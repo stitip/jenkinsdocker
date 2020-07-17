@@ -24,7 +24,7 @@ pipeline {
 				    echo "${NAME}"
 					echo "${VERSION}"
 					dockerImage = docker.build "$NAME"
-					dockerImage.push('$VERSION')
+					dockerImage.push(VERSION)
 				}
 			}
 		}
