@@ -23,7 +23,7 @@ pipeline {
 				script {
 				    echo "${NAME}"
 					echo "${VERSION}"
-					bat 'docker build -t shaik .'
+					docker.build ":$NAME"
 					bat 'docker tag ${NAME}:latest ${ECR}/${NAME}:${VERSION}'
 				}
 			}
