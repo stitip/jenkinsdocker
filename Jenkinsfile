@@ -29,14 +29,6 @@ pipeline {
 				}
 			}
 		}
-		stage ('Deployment in Kubernetes') {
-
-            steps {
-                  script {
-				    bat 'kubectl apply -f D:\GEGDC\SF675345\poc\kubernetes\demo\api-deployment.yaml'
-                    bat 'kubectl set image deployments/demo-api-svc test-kube-deployment-container="$NAME:$BUILD_NUMBER" --record'
-                }
-            }
-        }
+		
     }
 }
