@@ -24,7 +24,7 @@ pipeline {
 				    echo "${NAME}"
 					echo "${VERSION}"
 					dockerImage = docker.build "$NAME:$BUILD_NUMBER"
-					bat 'kubectl get pod'
+					bat 'kubectl get pod -n default'
 					//dockerImage.push(VERSION)
 				}
 			}
