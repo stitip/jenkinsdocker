@@ -35,7 +35,7 @@ pipeline {
 					echo "$version"
                     // set the build display name
                     currentBuild.displayName = "#${BUILD_ID}-${version}"
-					echo "$"currentBuild.displayName"
+					echo "$currentBuild.displayName"
                     IMAGE = "$PROJECT:$version"
 					echo "$IMAGE"
 					
