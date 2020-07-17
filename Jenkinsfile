@@ -2,7 +2,7 @@ pipeline {
   environment {
    NAME = "myapp"
    VERSION = "${env.BUILD_ID}-${env.GIT_COMMIT}"
-   IMAGE = ${NAME}:${VERSION}"
+   IMAGE = "${NAME}:${VERSION}"
    ECR = 'kubernetes'
 	dockerImage = ''
   }
