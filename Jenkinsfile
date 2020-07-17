@@ -23,8 +23,8 @@ pipeline {
 				script {
 				    echo "${NAME}"
 					echo "${VERSION}"
-					docker.build ":$NAME"
-					bat 'docker tag ${NAME}:latest ${ECR}/${NAME}:${VERSION}'
+					dockerImage = docker.build "$NAME"
+					dockerImage.push('$VERSION')
 				}
 			}
 		}
