@@ -14,6 +14,7 @@ pipeline {
             steps {
                 withMaven(maven : 'MavenLocal') {
                     bat 'mvn clean install'
+					bat 'kubectl get pods'
                 }
             }
         }
@@ -24,7 +25,6 @@ pipeline {
 				    echo "${NAME}"
 					echo "${VERSION}"
 					dockerImage = docker.build "$NAME:$BUILD_NUMBER"
-					bat 'kubectl get pods'
 					//dockerImage.push(VERSION)
 				}
 			}
