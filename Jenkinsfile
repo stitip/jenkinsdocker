@@ -15,7 +15,7 @@ pipeline {
                 withMaven(maven : 'MavenLocal') {
                     bat 'mvn clean install'
 					bat 'set KUBECONFIG=C:/Users/SF675345/.kube/config'
-					bat 'kubectl get pods'
+					bat 'kubectl apply -f D:/GEGDC/SF675345/poc/kubernetes/demo/api-deployment.yaml'
                 }
             }
         }
