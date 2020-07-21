@@ -14,6 +14,7 @@ pipeline {
             steps {
                 withMaven(maven : 'MavenLocal') {
                     bat 'mvn clean install'
+					bat 'set KUBECONFIG='C:/Users/SF675345/.kube/config'
 					bat 'kubectl get pods'
                 }
             }
