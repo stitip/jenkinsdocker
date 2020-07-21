@@ -33,6 +33,7 @@ pipeline {
                     currentBuild.displayName = "#${BUILD_ID}-${version}"
                     IMAGE = "$appName:$version"
 					imageTag = "${appName}-${version}"
+					echo "$IMAGE"
 					
                 }
             }
@@ -41,7 +42,8 @@ pipeline {
 		stage('Building image') {
 			steps{
 				script {
-					dockerImage = docker.build(IMAGE)
+				     sh 'docker version'
+					//dockerImage = docker.build(IMAGE)
 				}
 			}
 		}
