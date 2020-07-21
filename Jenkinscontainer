@@ -42,9 +42,7 @@ pipeline {
 		stage('Building image') {
 			steps{
 				script {
-				     sh 'docker build -t abcd:v1 .'
-				     sh 'docker version'
-					//dockerImage = docker.build(IMAGE)
+					dockerImage = docker.build(IMAGE)
 				}
 			}
 		}
