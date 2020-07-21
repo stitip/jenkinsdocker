@@ -42,7 +42,7 @@ pipeline {
 		stage('Building image') {
 			steps{
 				script {
-				     sh 'systemctl start docker'
+				     sh 'docker build -t "$IMAGE" .'
 				     sh 'docker version'
 					//dockerImage = docker.build(IMAGE)
 				}
