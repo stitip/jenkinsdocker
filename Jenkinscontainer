@@ -29,11 +29,7 @@ pipeline {
             {
                 script 
                 {
-                    gitCommitHash = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
-                    shortCommitHash = gitCommitHash.take(7)"
-                    // calculate a sample version tag
-                    version = shortCommitHash
-                    // set the build display name
+                    version = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
                     currentBuild.displayName = "#${BUILD_ID}-${version}"
                     IMAGE = "$appName:$version"
 					imageTag = "${appName}-${version}"
