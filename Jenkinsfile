@@ -14,7 +14,7 @@ pipeline {
             steps {
                 withMaven(maven : 'MavenLocal') {
                     bat 'mvn clean install'
-					bat 'set KUBECONFIG='C:/Users/SF675345/.kube/config'
+					bat 'set KUBECONFIG=C:/Users/SF675345/.kube/config'
 					bat 'kubectl get pods'
                 }
             }
@@ -26,7 +26,6 @@ pipeline {
 				    echo "${NAME}"
 					echo "${VERSION}"
 					dockerImage = docker.build "$NAME:$BUILD_NUMBER"
-					//dockerImage.push(VERSION)
 				}
 			}
 		}
