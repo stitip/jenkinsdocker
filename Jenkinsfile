@@ -39,5 +39,11 @@ pipeline {
 				}
 			}
 		}*/
+		
+		stage('deploy to K8S') {
+			steps{
+				kubernetesDeploy(configs: 'myweb.yaml',kubeconfigId: 'clusterkubeconfig',enableConfigSubstitution: true)
+			}
+		}
     }
 }
