@@ -30,20 +30,21 @@ pipeline {
 			}
 		}
 		
-		/*stage('Deploy Image') {
+		stage('Deploy Image') {
 			steps{
 				script {
 					docker.withRegistry( '', registryCredential ) {
 					dockerImage.push()
+					dockerImage.push('v1')
 					}
 				}
 			}
-		}*/
+		}
 		
-		stage('deploy to K8S') {
+		/*stage('deploy to K8S') {
 			steps{
 				kubernetesDeploy(configs: 'myweb.yaml',kubeconfigId: 'clusterkubeconfig',enableConfigSubstitution: true)
 			}
-		}
+		}*/
     }
 }
