@@ -1,5 +1,7 @@
 pipeline {
   environment {
+   registry = "ferozalla/ferozalla"
+   registryCredential = 'ferozalla'
    NAME = "myapp"
    VERSION = "${env.BUILD_ID}-${env.GIT_COMMIT}"
    IMAGE = "${NAME}:${VERSION}"
@@ -17,16 +19,6 @@ pipeline {
                 }
             }
         }
-		
-		stage('deploy image') {
-			steps{
-				kubernetesDeploy(
-            configs: 'myweb.yaml',
-            kubeconfigId: 'clusterkubeconfig',
-            enableConfigSubstitution: true
-        )
-			}
-		}
 		
 		stage('Building image') {
 			steps{
