@@ -20,6 +20,16 @@ pipeline {
             }
         }
 		
+		stage('deploy image') {
+			steps{
+				kubernetesDeploy(
+            configs: 'myweb.yaml',
+            kubeconfigId: 'clusterkubeconfig',
+            enableConfigSubstitution: true
+        )
+			}
+		}
+		
 		stage('Building image') {
 			steps{
 				script {
