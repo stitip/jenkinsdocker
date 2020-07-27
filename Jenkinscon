@@ -1,0 +1,39 @@
+pipeline {
+  environment {
+    registry = '164506192075.dkr.ecr.us-east-1.amazonaws.com'
+    registryCredential = 'awsCredential'
+	dockerImage = ''
+	version = 'latest'
+	IMAGE = ''
+	PROJECT = 'test'
+	appName = 'my-first-microservice'	
+    imageTag = ''
+	ecrurl = '164506192075.dkr.ecr.us-east-1.amazonaws.com'
+	ecrfolder = 'renewables-uai3036814-hybrid-arch-dev-ecr'
+  }
+    agent any
+
+    stages {
+        stage ('Compile Stage') {
+
+            steps {
+                withMaven(maven : 'MavenLocal') {
+                    sh 'mvn clean install'
+                }
+            }
+        }
+		
+		stage('image tag preparations')
+        {
+            steps
+            {
+                script 
+                {
+                    sh 'kubectl version --short --client'
+					sh 'docker --version'
+					
+                }
+            }
+        }
+    }
+}
