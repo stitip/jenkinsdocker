@@ -40,10 +40,10 @@ pipeline {
 			}
 		}*/
 		
-		/*stage('deploy to K8S') {
+		stage('deploy to K8S') {
 			steps{
 				kubernetesDeploy(configs: 'myservice.yaml',kubeconfigId: 'clusterkubeconfig',enableConfigSubstitution: true)
 			}
-		}*/
+		}
     }
 }
