@@ -30,7 +30,7 @@ pipeline {
 			}
 		}
 		
-		stage('Deploy Image') {
+		/*stage('Push Image') {
 			steps{
 				script {
 					docker.withRegistry( '', registryCredential ) {
@@ -38,11 +38,11 @@ pipeline {
 					}
 				}
 			}
-		}
+		}*/
 		
 		/*stage('deploy to K8S') {
 			steps{
-				kubernetesDeploy(configs: 'myweb.yaml',kubeconfigId: 'clusterkubeconfig',enableConfigSubstitution: true)
+				kubernetesDeploy(configs: 'myservice.yaml',kubeconfigId: 'clusterkubeconfig',enableConfigSubstitution: true)
 			}
 		}*/
     }
