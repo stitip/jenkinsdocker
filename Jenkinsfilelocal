@@ -5,9 +5,7 @@ pipeline {
 
            steps {
         script {
-          kubeconfig(credentialsId: 'clusterconfig', serverUrl: '') {
-    sh 'kubectl get pod'
-}
+         sh 'kubectl get pod'
         }
       }
         }
