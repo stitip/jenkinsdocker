@@ -11,7 +11,7 @@ pipeline {
     agent any
 
     stages {
-        stage ('Compile Stage') {
+        /*stage ('Compile Stage') {
 
             steps {
                 withMaven(maven : 'MavenLocal') {
@@ -30,7 +30,7 @@ pipeline {
 			}
 		}
 		
-		/*stage('Push Image') {
+		stage('Push Image') {
 			steps{
 				script {
 					docker.withRegistry( '', registryCredential ) {
@@ -43,7 +43,10 @@ pipeline {
 		stage('deploy to K8S') {
 			steps{
 			    bat 'kubectl version --short --client'
-				bat 'kubectl apply -f myservice.yaml'
+				withKubeConfig([credentialsId: 'clusterkubeconfig', serverUrl: 'https://kubernetes.docker.internal:6443']) {
+					bat 'kubectl apply -f myservice.yaml'
+					}
+				//bat 'kubectl apply -f myweb.yaml'
 				//kubernetesDeploy(configs: 'myservice.yaml',kubeconfigId: 'clusterkubeconfig',enableConfigSubstitution: true)
 			}
 		}
