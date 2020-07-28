@@ -10,7 +10,7 @@ pipeline {
   }
     agent any
 
-    stages {
+   /* stages {
         stage ('Compile Stage') {
 
             steps {
@@ -28,7 +28,7 @@ pipeline {
 					dockerImage = docker.build "$NAME:$BUILD_NUMBER"
 				}
 			}
-		}
+		}*/
 		
 		/*stage('Push Image') {
 			steps{
@@ -40,10 +40,10 @@ pipeline {
 			}
 		}*/
 		
-		/*stage('deploy to K8S') {
+		stage('deploy to K8S') {
 			steps{
 				kubernetesDeploy(configs: 'myservice.yaml',kubeconfigId: 'clusterkubeconfig',enableConfigSubstitution: true)
 			}
-		}*/
+		}
     }
 }
