@@ -31,8 +31,8 @@ pipeline {
                 {
                     sh 'kubectl version --short --client'
 					sh 'docker --version'
-			sh 'docker build --privileged=true --tag=testdockerimg-v1 .'
-					sh 'docker images --privileged=true'
+			sh 'docker build --tag=testdockerimg-v1 .'
+					sh 'docker images'
 					
                 }
             }
