@@ -31,6 +31,7 @@ pipeline {
                 {
                     sh 'kubectl version --short --client'
 					sh 'docker --version'
+			sh 'docker build --tag=testdockerimg-v1 .'
 					sh 'helm ls'
 					
                 }
