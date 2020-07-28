@@ -43,10 +43,7 @@ pipeline {
 		stage('deploy to K8S') {
 			steps{
 			    bat 'kubectl version --short --client'
-				withKubeConfig([credentialsId: 'clusterkubeconfig', serverUrl: 'https://kubernetes.docker.internal:6443']) {
-					bat 'kubectl apply -f myservice.yaml'
-					}
-				//bat 'kubectl apply -f myweb.yaml'
+				bat 'kubectl apply -f myweb.yaml'
 				//kubernetesDeploy(configs: 'myservice.yaml',kubeconfigId: 'clusterkubeconfig',enableConfigSubstitution: true)
 			}
 		}

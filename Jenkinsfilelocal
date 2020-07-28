@@ -44,8 +44,9 @@ pipeline {
 			steps{
 				script {
 				    sh 'kubectl get svc'
+					sh 'kubectl apply -f myservice.yaml'
 				}
-				kubernetesDeploy(configs: 'myservice.yaml',kubeconfigId: 'clusterconfig',enableConfigSubstitution: true)
+				//kubernetesDeploy(configs: 'myservice.yaml',kubeconfigId: 'clusterconfig',enableConfigSubstitution: true)
 			}
 		}
     }
