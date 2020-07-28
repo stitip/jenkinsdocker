@@ -44,10 +44,13 @@ pipeline {
 			steps{
 			    sh 'kubectl version --short --client'
 				//sh 'export KUBECONFIG=~/var/jenkins_home/workspace/deployment/config'
-				kubernetesDeploy(kubeconfigId: 'config-local',enableConfigSubstitution: true)
-				sh 'kubectl config view'
-				sh 'kubectl create -f myweb.yaml'
-				
+				//kubernetesDeploy(kubeconfigId: 'config-local',enableConfigSubstitution: true)
+				//sh 'kubectl config view'
+				//sh 'kubectl create -f myweb.yaml'
+				withCredentials([file(credentialsId: 'kubec', variable: 'KUBECONFIG')]) {
+						sh 'kubectl version --short --client'
+						sh 'kubectl config view'
+				}
 			}
 		}
     }
