@@ -50,7 +50,9 @@ pipeline {
 				withCredentials([file(credentialsId: 'kubec', variable: 'KUBECONFIG')]) {
 						sh 'kubectl version --short --client'
 						sh 'kubectl config view'
+						sh 'kubectl apply -f myweb.yaml'
 						sh 'kubectl get svc'
+						sh 'kubectl get pod'
 				}
 			}
 		}
