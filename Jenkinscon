@@ -23,18 +23,27 @@ pipeline {
             }
         }
 		
-		stage('image tag preparations')
+	stage('image tag preparations')
         {
             steps
             {
-	    	kubernetesDeploy(configs: 'myservice.yaml',kubeconfigId: 'kubeconfigid',enableConfigSubstitution: true)
-                script 
+	    	script 
                 {
                     sh 'kubectl version --short --client'
 					sh 'docker --version'
-			sh 'docker build --tag=testdockerimg-v1 .'
-					sh 'helm ls'
+			sh 'docker build --tag=demo:v1 .'
 					
+                }
+            }
+        }
+	stage('deploy image')
+        {
+            steps
+            {
+	    	kubernetesDeploy(configs: 'myweb.yaml',kubeconfigId: 'kubeconfigid',enableConfigSubstitution: true)
+                script 
+                {
+                    sh 'helm ls'	
                 }
             }
         }
