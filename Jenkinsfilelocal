@@ -10,8 +10,8 @@ pipeline {
   }
     agent any
 
-   /* stages {
-        stage ('Compile Stage') {
+    stages {
+        /*stage ('Compile Stage') {
 
             steps {
                 withMaven(maven : 'MavenLocal') {
@@ -28,9 +28,9 @@ pipeline {
 					dockerImage = docker.build "$NAME:$BUILD_NUMBER"
 				}
 			}
-		}*/
+		}
 		
-		/*stage('Push Image') {
+		stage('Push Image') {
 			steps{
 				script {
 					docker.withRegistry( '', registryCredential ) {
@@ -43,6 +43,9 @@ pipeline {
 		stage('deploy to K8S') {
 			steps{
 				kubernetesDeploy(configs: 'myservice.yaml',kubeconfigId: 'clusterkubeconfig',enableConfigSubstitution: true)
+				script {
+				    sh 'kubectl get svc'
+				}
 			}
 		}
     }
