@@ -43,7 +43,9 @@ pipeline {
 		stage('deploy to K8S') {
 			steps{
 				script {
-					sh 'kubectl apply -f myweb.yaml'
+					sh 'kubectl version --short --client'
+					sh 'kubectl config view'
+					//sh 'kubectl apply -f myweb.yaml'
 					sh 'kubectl get pod'
 					sh 'kubectl get svc'
 				}

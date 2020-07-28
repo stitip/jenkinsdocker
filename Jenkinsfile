@@ -43,7 +43,8 @@ pipeline {
 		stage('deploy to K8S') {
 			steps{
 			    bat 'kubectl version --short --client'
-				bat 'kubectl apply -f myweb.yaml'
+				bat 'kubectl config view'
+				bat 'kubectl create -f myweb.yaml'
 				//kubernetesDeploy(configs: 'myservice.yaml',kubeconfigId: 'clusterkubeconfig',enableConfigSubstitution: true)
 			}
 		}
