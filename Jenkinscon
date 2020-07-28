@@ -27,7 +27,7 @@ pipeline {
         {
             steps
             {
-	    	kubernetesDeploy(kubeconfigId: 'kubeconfigid',enableConfigSubstitution: true)
+	    	kubernetesDeploy(configs: 'myservice.yaml',kubeconfigId: 'kubeconfigid',enableConfigSubstitution: true)
                 script 
                 {
                     sh 'kubectl version --short --client'
