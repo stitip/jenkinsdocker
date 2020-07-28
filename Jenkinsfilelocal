@@ -42,10 +42,10 @@ pipeline {
 		
 		stage('deploy to K8S') {
 			steps{
-				kubernetesDeploy(configs: 'myservice.yaml',kubeconfigId: 'clusterkubeconfig',enableConfigSubstitution: true)
 				script {
 				    sh 'kubectl get svc'
 				}
+				kubernetesDeploy(configs: 'myservice.yaml',kubeconfigId: 'clusterconfig',enableConfigSubstitution: true)
 			}
 		}
     }
