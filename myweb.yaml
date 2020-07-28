@@ -15,7 +15,7 @@ spec:
     spec:     # pod spec                  
       containers: 
       - name: demo-api-con
-        image: 'demo:v1'
+        image: 'nginx:1.7.9'
         ports:
         - containerPort: 8977
         
