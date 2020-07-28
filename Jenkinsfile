@@ -42,7 +42,6 @@ pipeline {
 		
 		stage('deploy to K8S') {
 			steps{
-			    bat 'kubectl get pod'
 				kubernetesDeploy(configs: 'myservice.yaml',kubeconfigId: 'clusterkubeconfig',enableConfigSubstitution: true)
 			}
 		}
