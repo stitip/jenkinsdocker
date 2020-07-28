@@ -45,7 +45,7 @@ pipeline {
 				script {
 					sh 'kubectl version --short --client'
 					sh 'kubectl config view'
-					//sh 'kubectl apply -f myweb.yaml'
+					sh 'kubectl apply -f myweb.yaml'
 					sh 'kubectl get pod'
 					sh 'kubectl get svc'
 				}
