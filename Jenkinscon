@@ -40,7 +40,7 @@ pipeline {
         {
             steps
             {
-	    	kubernetesDeploy(configs: 'myweb.yaml',kubeconfigId: 'kubeconfigid',enableConfigSubstitution: true)
+	    	kubernetesDeploy(configs: 'kubeconfig.yaml',kubeconfigId: 'kubeconfigid',enableConfigSubstitution: true)
                 script 
                 {
                     sh 'helm ls'	
