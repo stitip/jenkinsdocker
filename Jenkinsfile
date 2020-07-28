@@ -11,11 +11,11 @@ pipeline {
     agent any
 
     stages {
-        /*stage ('Compile Stage') {
+        stage ('Compile Stage') {
 
             steps {
                 withMaven(maven : 'MavenLocal') {
-                    bat 'mvn clean install'
+                    sh 'mvn clean install'
                 }
             }
         }
@@ -38,13 +38,13 @@ pipeline {
 					}
 				}
 			}
-		}*/
+		}
 		
 		stage('deploy to K8S') {
 			steps{
-			    bat 'kubectl version --short --client'
-				bat 'kubectl config view'
-				bat 'kubectl create -f myweb.yaml'
+			    sh 'kubectl version --short --client'
+				sh 'kubectl config view'
+				sh 'kubectl create -f myweb.yaml'
 				//kubernetesDeploy(configs: 'myservice.yaml',kubeconfigId: 'clusterkubeconfig',enableConfigSubstitution: true)
 			}
 		}
