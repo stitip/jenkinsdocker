@@ -47,6 +47,7 @@ pipeline {
 						sh 'kubectl config view'
 						//sh 'kubectl apply -f api-deployment.yaml'
 						//sh 'kubectl apply -f api-service.yaml'
+						sh 'helm install test-deployment test-helm'
 						sh 'kubectl get svc'
 						sh 'kubectl get pod'
 						sh 'helm ls'
