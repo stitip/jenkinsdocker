@@ -42,15 +42,11 @@ pipeline {
 		
 		stage('deploy to K8S') {
 			steps{
-			    sh 'kubectl version --short --client'
-				//sh 'export KUBECONFIG=~/var/jenkins_home/workspace/deployment/config'
-				//kubernetesDeploy(kubeconfigId: 'config-local',enableConfigSubstitution: true)
-				//sh 'kubectl config view'
-				//sh 'kubectl create -f myweb.yaml'
 				withCredentials([file(credentialsId: 'kubec', variable: 'KUBECONFIG')]) {
 						sh 'kubectl version --short --client'
 						sh 'kubectl config view'
-						sh 'kubectl apply -f myweb.yaml'
+						sh 'kubectl apply -f api-deployment.yaml'
+						sh 'kubectl apply -f api-service.yaml'
 						sh 'kubectl get svc'
 						sh 'kubectl get pod'
 				}

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-svc
+spec:
+  selector: 
+    app: myapp-api-svc
+  type: NodePort
+  ports:
+    - port: 9999
+      targetPort: 8977
+      nodePort: 31000
