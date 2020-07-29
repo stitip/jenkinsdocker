@@ -40,9 +40,9 @@ pipeline {
         {
             steps
             {
-	    	kubernetesDeploy(configs: 'Chart.yaml',kubeconfigId: 'kubeconfigid',enableConfigSubstitution: true)
-                script 
+	    	script 
                 {
+			sh 'kubectl config --kubeconfig=kubeconfig view'
                     sh 'helm ls'	
                 }
             }
