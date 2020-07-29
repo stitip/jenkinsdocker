@@ -42,7 +42,8 @@ pipeline {
             {
 	    	script 
                 {
-			sh 'kubectl config --kubeconfig=kubeconfig view'
+			sh 'export KUBECONFIG=$KUBECONFIG:kubeconfig'
+			sh 'kubectl config view'
                     sh 'helm ls'	
                 }
             }
