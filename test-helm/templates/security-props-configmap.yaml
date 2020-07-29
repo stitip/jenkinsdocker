@@ -16,5 +16,5 @@ kind: ConfigMap
 metadata:
   creationTimestamp: null
   labels:
-    io.kompose.service: api-security-props
-  name: security-props
+    io.kompose.service: test-deployment-api-security-props
+  name: test-deployment-security-props
