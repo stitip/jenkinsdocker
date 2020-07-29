@@ -45,12 +45,12 @@ pipeline {
 				withCredentials([file(credentialsId: 'kubec', variable: 'KUBECONFIG')]) {
 						bat 'kubectl version --short --client'
 						bat 'kubectl config view'
-						bat 'kubectl apply -f api-deployment.yaml'
-						bat 'kubectl apply -f api-service.yaml'
+						//bat 'kubectl apply -f api-deployment.yaml'
+						//bat 'kubectl apply -f api-service.yaml'
 						//bat 'helm uninstall test-deployment test-helm'
 						bat 'kubectl get svc'
 						bat 'kubectl get pod'
-						//bat 'helm ls'
+						bat 'helm ls'
 						//bat 'helm uninstall test-deployment'
 				}
 			}
