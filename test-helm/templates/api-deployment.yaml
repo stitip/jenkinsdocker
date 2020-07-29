@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-api-svc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo-api-svc
+  template:
+    metadata:
+      labels: # labels to select/identify the deployment
+        app: demo-api-svc
+    spec:     # pod spec                  
+      containers: 
+      - name: demo-api-con
+        image: 'demo:v1'
+        ports:
+        - containerPort: 8977

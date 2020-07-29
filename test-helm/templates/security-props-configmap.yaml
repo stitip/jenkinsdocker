@@ -1,0 +1,20 @@
+apiVersion: v1
+data:
+  com_ge_research_office_document_security_basic_users_0_name: reader
+  com_ge_research_office_document_security_basic_users_0_password: readerPass
+  com_ge_research_office_document_security_basic_users_0_roles: reader
+  com_ge_research_office_document_security_basic_users_1_name: writer
+  com_ge_research_office_document_security_basic_users_1_password: author
+  com_ge_research_office_document_security_basic_users_1_roles: author
+  com_ge_research_office_document_security_basic_users_2_name: manager
+  com_ge_research_office_document_security_basic_users_2_password: adminPass
+  com_ge_research_office_document_security_basic_users_2_roles: admin
+  com_ge_research_office_document_security_basic_users_3_name: superADMIN
+  com_ge_research_office_document_security_basic_users_3_password: ownerPass
+  com_ge_research_office_document_security_basic_users_3_roles: owner
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: api-security-props
+  name: security-props
