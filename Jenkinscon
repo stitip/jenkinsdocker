@@ -10,6 +10,7 @@ pipeline {
     imageTag = ''
 	ecrurl = '164506192075.dkr.ecr.us-east-1.amazonaws.com'
 	ecrfolder = 'renewables-uai3036814-hybrid-arch-dev-ecr'
+	KUBECONFIG = 'kubeconfig'
   }
     agent any
 
@@ -42,7 +43,7 @@ pipeline {
             {
 	    	script 
                 {
-			sh 'export KUBECONFIG=kubeconfig'
+			sh 'export KUBECONFIG=$KUBECONFIG'
 			sh 'kubectl config view'
                     sh 'helm ls'	
                 }
