@@ -14,6 +14,6 @@ spec:
     spec:     # pod spec                  
       containers: 
       - name: myapp-api-con
-        image: 'myapp:100'
+        image: 'dockerimage'
         ports:
         - containerPort: 8977
