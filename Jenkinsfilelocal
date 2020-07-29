@@ -1,4 +1,3 @@
-local jenkins build 97 build integration-pipeline
 pipeline {
   environment {
    registry = "ferozalla/ferozalla"
@@ -12,7 +11,7 @@ pipeline {
     agent any
 
     stages {
-        /*stage ('Compile Stage') {
+        stage ('Compile Stage') {
 
             steps {
                 withMaven(maven : 'MavenLocal') {
@@ -31,7 +30,7 @@ pipeline {
 			}
 		}
 		
-		stage('Push Image') {
+		/*stage('Push Image') {
 			steps{
 				script {
 					docker.withRegistry( '', registryCredential ) {
@@ -44,15 +43,15 @@ pipeline {
 		stage('deploy to K8S') {
 			steps{
 				withCredentials([file(credentialsId: 'kubec', variable: 'KUBECONFIG')]) {
-						sh 'kubectl version --short --client'
-						sh 'kubectl config view'
-						sh 'kubectl apply -f api-deployment.yaml'
-						sh 'kubectl apply -f api-service.yaml'
-						//sh 'helm uninstall test-deployment test-helm'
-						sh 'kubectl get svc'
-						sh 'kubectl get pod'
-						sh 'helm ls'
-						//sh 'helm uninstall test-deployment'
+						bat 'kubectl version --short --client'
+						bat 'kubectl config view'
+						bat 'kubectl apply -f api-deployment.yaml'
+						bat 'kubectl apply -f api-service.yaml'
+						//bat 'helm uninstall test-deployment test-helm'
+						bat 'kubectl get svc'
+						bat 'kubectl get pod'
+						//bat 'helm ls'
+						//bat 'helm uninstall test-deployment'
 				}
 			}
 		}
