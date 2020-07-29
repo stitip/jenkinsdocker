@@ -1,3 +1,4 @@
+local jenkins build 97 build integration-pipeline
 pipeline {
   environment {
    registry = "ferozalla/ferozalla"
@@ -15,7 +16,7 @@ pipeline {
 
             steps {
                 withMaven(maven : 'MavenLocal') {
-                    sh 'mvn clean install'
+                    bat 'mvn clean install'
                 }
             }
         }
@@ -42,14 +43,17 @@ pipeline {
 		
 		stage('deploy to K8S') {
 			steps{
-				script {
-					sh 'kubectl version --short --client'
-					sh 'kubectl config view'
-					sh 'kubectl apply -f myweb.yaml'
-					sh 'kubectl get pod'
-					sh 'kubectl get svc'
+				withCredentials([file(credentialsId: 'kubec', variable: 'KUBECONFIG')]) {
+						sh 'kubectl version --short --client'
+						sh 'kubectl config view'
+						sh 'kubectl apply -f api-deployment.yaml'
+						sh 'kubectl apply -f api-service.yaml'
+						//sh 'helm uninstall test-deployment test-helm'
+						sh 'kubectl get svc'
+						sh 'kubectl get pod'
+						sh 'helm ls'
+						//sh 'helm uninstall test-deployment'
 				}
-				//kubernetesDeploy(configs: 'myservice.yaml',kubeconfigId: 'clusterconfig',enableConfigSubstitution: true)
 			}
 		}
     }
