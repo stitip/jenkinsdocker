@@ -45,7 +45,8 @@ pipeline {
                 {
 			sh 'export KUBECONFIG=$KUBECONFIG'
 			sh 'kubectl config view'
-                    sh 'helm ls'	
+                    sh 'helm ls'
+		    sh 'helm install test-deployment myweb.yaml'
                 }
             }
         }
