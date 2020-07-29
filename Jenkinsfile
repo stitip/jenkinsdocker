@@ -45,9 +45,11 @@ pipeline {
 				withCredentials([file(credentialsId: 'kubec', variable: 'KUBECONFIG')]) {
 						sh 'kubectl version --short --client'
 						sh 'kubectl config view'
+						echo "${dockerImage}"
+						sh 'sed -i "s/image/${dockerImage}/g" /api-deployment.yml'
 						//sh 'kubectl apply -f api-deployment.yaml'
 						//sh 'kubectl apply -f api-service.yaml'
-						sh 'helm uninstall test-deployment test-helm'
+						//sh 'helm uninstall test-deployment test-helm'
 						sh 'kubectl get svc'
 						sh 'kubectl get pod'
 						sh 'helm ls'
