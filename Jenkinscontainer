@@ -23,8 +23,8 @@ pipeline {
             {
                 script 
                 {
-                    version = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
-                    currentBuild.displayName = "#${BUILD_ID}-${version}"
+		    gitCommitHash = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
+                    version = gitCommitHash.take(7)
                     IMAGE = "$appName:$version"
 		    echo "$IMAGE"
 					
