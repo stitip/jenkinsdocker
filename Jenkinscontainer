@@ -1,15 +1,9 @@
 pipeline {
   environment {
-    registry = '164506192075.dkr.ecr.us-east-1.amazonaws.com'
-    registryCredential = 'awsCredential'
 	dockerImage = ''
-	version = 'latest'
+	version = 'v1'
 	IMAGE = ''
-	PROJECT = 'test'
-	appName = 'my-first-microservice'	
-    imageTag = ''
-	ecrurl = '164506192075.dkr.ecr.us-east-1.amazonaws.com'
-	ecrfolder = 'renewables-uai3036814-hybrid-arch-dev-ecr'
+	appName = 'myapp'
   }
     agent any
 
@@ -32,8 +26,7 @@ pipeline {
                     version = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
                     currentBuild.displayName = "#${BUILD_ID}-${version}"
                     IMAGE = "$appName:$version"
-					imageTag = "${appName}-${version}"
-					echo "$IMAGE"
+		    echo "$IMAGE"
 					
                 }
             }
