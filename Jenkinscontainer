@@ -35,6 +35,8 @@ pipeline {
 		stage('Building image') {
 			steps{
 				script {
+				        sh 'docker --version'
+					sh 'kubectl version --short --client'
 					dockerImage = docker.build(IMAGE)
 				}
 			}
