@@ -23,10 +23,11 @@ pipeline {
             {
                 script 
                 {
-					gitCommitHash = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
+		    gitCommitHash = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
                     version = gitCommitHash.take(7)
                     IMAGE = "$appName:$version"
-					echo "$IMAGE"					
+		    echo "$IMAGE"
+					
                 }
             }
         }
@@ -35,34 +36,10 @@ pipeline {
 			steps{
 				script {
 				        sh 'docker --version'
-						sh 'kubectl version --short --client'
-						dockerImage = docker.build(IMAGE)
+					sh 'kubectl version --short --client'
+					dockerImage = docker.build(IMAGE)
 				}
 			}
 		}
-		
-		stage('Pushing image to ECR') {
-            steps{
-                script {
-						sh("eval \$(aws ecr get-login --no-include-email | sed 's|https://||')")
-						docker.withRegistry(ecrurl)
-							{
-								docker.image(IMAGE).push()
-							}
-				}
-            }
-        }
-		
-		/*stage('deploy to K8S') {
-            steps{
-                withCredentials([file(credentialsId: 'kubec', variable: 'KUBECONFIG')]) {
-                        sh 'kubectl version --short --client'
-                        sh 'kubectl config view'
-                        sh 'kubectl get svc'
-                        sh 'kubectl get pod'
-                        sh 'helm ls'
-                }
-            }
-        }*/
     }
 }
