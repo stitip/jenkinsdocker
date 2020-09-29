@@ -4,6 +4,8 @@ pipeline {
 	version = 'v1'
 	IMAGE = ''
 	appName = 'myapp'
+	ECR_URL = '164506192075.dkr.ecr.us-east-1.amazonaws.com'
+	ECR_FOLDER = 'renewables-uai3036814-hybrid-arch-dev-ecr'
   }
     agent any
 
@@ -25,7 +27,7 @@ pipeline {
                 {
 					gitCommitHash = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
                     version = gitCommitHash.take(7)
-                    IMAGE = "$appName:$version"
+                    IMAGE = "${ECR_URL}/${ECR_FOLDER}:$appName-$version"
 					echo "$IMAGE"
 					
                 }
@@ -36,8 +38,8 @@ pipeline {
 			steps{
 				script {
 				        sh 'docker --version'
-					sh 'kubectl version --short --client'
-					dockerImage = docker.build(IMAGE)
+						sh 'kubectl version --short --client'
+						dockerImage = docker.build(IMAGE)
 				}
 			}
 		}
@@ -45,7 +47,6 @@ pipeline {
 		stage('Pushing image to ECR') {
             steps{
                 script {
-						//sh("eval \$(aws ecr get-login --no-include-email | sed 's|https://||')")
 						docker.image(IMAGE).push()							
                 }
             }
