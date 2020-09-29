@@ -13,7 +13,7 @@ pipeline {
             steps {
                 withMaven(maven : 'MavenLocal') {
                     sh 'mvn clean install'
-					sh 'kubectl get pod'
+					sh 'kubectl get pod -n hybrid-dev'
                 }
             }
         }
