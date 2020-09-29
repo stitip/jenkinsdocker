@@ -13,6 +13,7 @@ pipeline {
             steps {
                 withMaven(maven : 'MavenLocal') {
                     sh 'mvn clean install'
+					sh 'kubectl get pod'
                 }
             }
         }
@@ -46,10 +47,7 @@ pipeline {
             steps{
                 script {
 						sh("eval \$(aws ecr get-login --no-include-email | sed 's|https://||')")
-						docker.withRegistry(ecrurl)
-							{
-								docker.image(IMAGE).push()
-							}
+						docker.image(IMAGE).push()							
                 }
             }
         }
