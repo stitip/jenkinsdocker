@@ -27,7 +27,7 @@ pipeline {
                 {
 					gitCommitHash = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
                     version = gitCommitHash.take(7)
-                    IMAGE = "${ECR_URL}/${ECR_FOLDER}:$appName-$version"
+                    IMAGE = "${ECR_URL}/${ECR_FOLDER}:$appName"
 					echo "$IMAGE"
 					
                 }
@@ -48,7 +48,7 @@ pipeline {
             steps{
                 script {
 				        echo "$IMAGE" 
-						sh 'docker push "${IMAGE}"'						
+						sh 'docker push 164506192075.dkr.ecr.us-east-1.amazonaws.com/renewables-uai3036814-hybrid-arch-dev-ecr:myapp'						
                 }
             }
         }
