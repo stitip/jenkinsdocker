@@ -13,7 +13,6 @@ pipeline {
             steps {
                 withMaven(maven : 'MavenLocal') {
                     sh 'mvn clean install'
-					sh 'kubectl get pod -n hybrid-dev'
                 }
             }
         }
@@ -46,7 +45,7 @@ pipeline {
 		stage('Pushing image to ECR') {
             steps{
                 script {
-						sh("eval \$(aws ecr get-login --no-include-email | sed 's|https://||')")
+						//sh("eval \$(aws ecr get-login --no-include-email | sed 's|https://||')")
 						docker.image(IMAGE).push()							
                 }
             }
