@@ -47,7 +47,7 @@ pipeline {
 		stage('Pushing image to ECR') {
             steps{
                 script {
-				        sh("eval \$(aws ecr get-login --no-include-email --region us-east-1 | sed 's|https://||')")
+				        sh("eval \$(aws ecr get-login --no-include-email --region us-east-1 | sed 's|http://||')")
 						sh 'docker push 164506192075.dkr.ecr.us-east-1.amazonaws.com/renewables-uai3036814-hybrid-arch-dev-ecr:myapp'						
                 }
             }
