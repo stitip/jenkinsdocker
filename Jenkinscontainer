@@ -47,7 +47,7 @@ pipeline {
 		stage('Pushing image to ECR') {
             steps{
                 script {
-						sh 'docker push IMAGE'						
+						sh 'docker push "$IMAGE"'						
                 }
             }
         }
