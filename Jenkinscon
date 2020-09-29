@@ -31,7 +31,6 @@ pipeline {
                 {
                     sh 'kubectl version --short --client'
 					sh 'docker --version'
-					
                 }
             }
         }

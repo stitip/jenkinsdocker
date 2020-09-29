@@ -1,15 +1,9 @@
 pipeline {
   environment {
-    registry = '164506192075.dkr.ecr.us-east-1.amazonaws.com'
-    registryCredential = 'awsCredential'
 	dockerImage = ''
-	version = 'latest'
+	version = 'v1'
 	IMAGE = ''
-	PROJECT = 'test'
-	appName = 'my-first-microservice'	
-    imageTag = ''
-	ecrurl = '164506192075.dkr.ecr.us-east-1.amazonaws.com'
-	ecrfolder = 'renewables-uai3036814-hybrid-arch-dev-ecr'
+	appName = 'myapp'
   }
     agent any
 
@@ -29,22 +23,46 @@ pipeline {
             {
                 script 
                 {
-                    version = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
-                    currentBuild.displayName = "#${BUILD_ID}-${version}"
+					gitCommitHash = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
+                    version = gitCommitHash.take(7)
                     IMAGE = "$appName:$version"
-					imageTag = "${appName}-${version}"
-					echo "$IMAGE"
-					
+					echo "$IMAGE"					
                 }
             }
         }
 		
-		/*stage('Building image') {
+		stage('Building image') {
 			steps{
 				script {
-					dockerImage = docker.build(IMAGE)
+				        sh 'docker --version'
+						sh 'kubectl version --short --client'
+						dockerImage = docker.build(IMAGE)
 				}
 			}
-		}*/
+		}
+		
+		stage('Pushing image to ECR') {
+            steps{
+                script {
+						sh("eval \$(aws ecr get-login --no-include-email | sed 's|https://||')")
+						docker.withRegistry(ecrurl)
+							{
+								docker.image(IMAGE).push()
+							}
+				}
+            }
+        }
+		
+		/*stage('deploy to K8S') {
+            steps{
+                withCredentials([file(credentialsId: 'kubec', variable: 'KUBECONFIG')]) {
+                        sh 'kubectl version --short --client'
+                        sh 'kubectl config view'
+                        sh 'kubectl get svc'
+                        sh 'kubectl get pod'
+                        sh 'helm ls'
+                }
+            }
+        }*/
     }
 }
