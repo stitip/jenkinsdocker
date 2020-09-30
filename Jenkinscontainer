@@ -6,6 +6,7 @@ pipeline {
 	appName = 'myapp'
 	ECR_URL = '164506192075.dkr.ecr.us-east-1.amazonaws.com'
 	ECR_FOLDER = 'renewables-uai3036814-hybrid-arch-dev-ecr'
+	KUBECONFIG = 'kubeconfig'
   }
     agent any
 
