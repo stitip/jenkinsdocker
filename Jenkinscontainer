@@ -57,7 +57,7 @@ pipeline {
 		stage('deploy to K8S') {
             steps{
                 withCredentials([file(credentialsId: 'kubeconfigid', variable: 'KUBECONFIG')]) {
-                        sh 'kubectl version --short --client'
+                        sh 'kubectl version --short --client -n hybrid-dev'
                         //sh 'kubectl config view'
                         sh 'kubectl get svc -n hybrid-dev'
                         sh 'kubectl get pod -n hybrid-dev'
